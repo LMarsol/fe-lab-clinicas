@@ -8,7 +8,7 @@
       "name": "fe-lab-clinicas-self-service",
       "request": "launch",
       "type": "dart",
-      "args": ["--dart-define-from-file", ".config/env.json"]
+      "args": ["--dart-define-from-file", "./config/env.json"]
     },
     {
       "name": "fe-lab-clinicas-self-service (profile mode)",
