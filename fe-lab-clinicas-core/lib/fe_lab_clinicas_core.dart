@@ -10,3 +10,4 @@ export 'src/fp/unit.dart';
 export 'src/helpers/messages.dart';
 export 'src/lab_clinicas_core_config.dart';
 export 'src/rest_client/rest_client.dart';
+export 'src/theme/lab_clinicas_theme.dart';
