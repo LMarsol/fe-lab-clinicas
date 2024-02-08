@@ -1,7 +1,25 @@
+import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailEC = TextEditingController();
+  final _passwordEC = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailEC.dispose();
+    _passwordEC.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,35 +43,55 @@ class LoginPage extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Column(
-                children: [
-                  const Text(
-                    'Login',
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(label: Text('Email')),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(label: Text('Senha')),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('ENTRAR'),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const Text(
+                      'Login',
+                      style: LabClinicasTheme.titleStyle,
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    TextFormField(
+                      controller: _emailEC,
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Email obrigatório'),
+                        Validatorless.email('Email inválido'),
+                      ]),
+                      decoration: const InputDecoration(label: Text('Email')),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextFormField(
+                      controller: _passwordEC,
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Senha obrigatória'),
+                      ]),
+                      obscureText: true,
+                      decoration: const InputDecoration(label: Text('Senha')),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final valid = _formKey.currentState?.validate() ?? false;
+
+                          if (valid) {
+                            // Proceed
+                          }
+                        },
+                        child: const Text('ENTRAR'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
