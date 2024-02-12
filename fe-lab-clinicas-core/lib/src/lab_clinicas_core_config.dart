@@ -35,6 +35,7 @@ class LabClinicasCoreConfig extends StatelessWidget {
             return MaterialApp(
               title: title,
               routes: routes,
+              debugShowCheckedModeBanner: false,
               theme: LabClinicasTheme.lightTheme,
               darkTheme: LabClinicasTheme.darkTheme,
               navigatorObservers: [asyncStateNavObserver, flutterGetItNavObserver],
